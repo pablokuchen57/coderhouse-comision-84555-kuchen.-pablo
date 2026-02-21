@@ -1,0 +1,12 @@
+{
+    "criptomonedas": [
+    { "id": "BTC", "nombre": "Bitcoin", "precioUSD": 64000 },
+    { "id": "ETH", "nombre": "Ethereum", "precioUSD": 3200 },
+    { "id": "USDT", "nombre": "Tether", "precioUSD": 1 }
+    ],
+    "monedas": [
+    { "codigo": "USD", "cotizacion": 1 },
+    { "codigo": "ARS", "cotizacion": 1100 },
+    { "codigo": "EUR", "cotizacion": 0.92 }
+    ]
+}
