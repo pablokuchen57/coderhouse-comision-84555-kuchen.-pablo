@@ -38,51 +38,6 @@ async function cargarDatos() {
     renderizarOpciones();
     renderizarMenuCriptoRapido();
 }
-async function cargarDatos() {
-    const response = await fetch("./data/cryptoData.json");
-    const data = await response.json();
-
-    criptos = data.criptomonedas.map(
-        c => new Criptomoneda(c.id, c.nombre, c.precioUSD)
-    );
-
-    monedas = data.monedas.map(
-        m => new Criptomoneda(m.id, m.nombre, m.precioUSD)
-    );
-
-    renderizarOpciones();
-    renderizarMenuCriptoRapido();
-}
-async function cargarDatos() {
-    const response = await fetch("./data/cryptoData.json");
-    const data = await response.json();
-
-    criptos = data.criptomonedas.map(
-        c => new Criptomoneda(c.id, c.nombre, c.precioUSD)
-    );
-
-    monedas = data.monedas.map(
-        m => new Criptomoneda(m.id, m.nombre, m.precioUSD)
-    );
-
-    renderizarOpciones();
-    renderizarMenuCriptoRapido();
-}
-async function cargarDatos() {
-    const response = await fetch("./data/cryptoData.json");
-    const data = await response.json();
-
-    criptos = data.criptomonedas.map(
-        c => new Criptomoneda(c.id, c.nombre, c.precioUSD)
-    );
-
-    monedas = data.monedas.map(
-        m => new Criptomoneda(m.id, m.nombre, m.precioUSD)
-    );
-
-    renderizarOpciones();
-    renderizarMenuCriptoRapido();
-}
 
 function renderizarOpciones() {
     const criptoSelect = document.getElementById("criptoSelect");
@@ -108,14 +63,14 @@ function renderizarOpciones() {
 // CONVERSIÓN
 // ======================
 
-const form = document.getElementById("formConvertidor");
-const criptoSelect = document.getElementById("criptoSelect");
-const monedaSelect = document.getElementById("monedaSelect");
-const montoInput = document.getElementById("montoInput");
-const resultado = document.getElementById("resultado");
+const form = document.querySelector("#formConvertidor");
+const criptoSelect = document.querySelector("#criptoSelect");
+const monedaSelect = document.querySelector("#monedaSelect");
+const montoInput = document.querySelector("#montoInput");
+const resultado = document.querySelector("#resultado");
 
 form.addEventListener("submit", async (e) => {
-  e.preventDefault(); // evita que se recargue la página
+    e.preventDefault(); // evita que se recargue la página
 
     const criptoOrigen = criptoSelect.value;
     const criptoDestino = monedaSelect.value;
@@ -126,7 +81,7 @@ form.addEventListener("submit", async (e) => {
     return;
     }
 
-  // Mapeo de nombres a IDs de CoinGecko
+    // Mapeo de nombres a IDs de CoinGecko
     const monedas = {
     Bitcoin: "bitcoin",
     Ethereum: "ethereum",
@@ -159,9 +114,11 @@ form.addEventListener("submit", async (e) => {
 
     resultado.textContent = `${monto} ${criptoOrigen} ≈ ${conversion.toFixed(6)} ${criptoDestino}`;
 
-} catch (error) {
-    Swal.fire("Error", "No se pudo obtener el precio", "error");
-}
+    guardarHistorial(monto, criptoOrigen, conversion, criptoDestino);
+
+    } catch (error) {
+        Swal.fire("Error", "No se pudo obtener el precio", "error");
+    }
 });
 
 
@@ -201,9 +158,5 @@ function renderizarHistorial() {
 // INICIALIZACIÓN
 // ======================
 
-document
-    .getElementById("formConvertidor")
-    .addEventListener("submit", procesarConversion);
-
 renderizarHistorial();
-cargarDatos();
+cargarDatos().then();
